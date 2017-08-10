@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using ShadowrunInitiative.Core;
 
 namespace ShadowrunInitiative
 {
@@ -14,7 +15,7 @@ namespace ShadowrunInitiative
             InitializeComponent();
 
             m_Character = character;
-            characterNameLabel.Text = character.Name;
+            characterNameLabel.Text = character.name;
         }
 
         /// <summary>
@@ -23,7 +24,12 @@ namespace ShadowrunInitiative
         public void ApplyInit()
         {
             m_Character.Initiative = (int)initiativeNumeric.Value;
-            m_Character.Seize = seizeCheckBox.Checked;
+            m_Character.seize = seizeCheckBox.Checked;
+        }
+
+        private void Wuerfelbutton_Click(object sender, System.EventArgs e)
+        {
+            initiativeNumeric.Value = m_Character.getIni();
         }
     }
 }

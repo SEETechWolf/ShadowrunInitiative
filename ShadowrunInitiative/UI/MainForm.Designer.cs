@@ -1,6 +1,8 @@
-﻿namespace ShadowrunInitiative
+﻿using ShadowrunInitiative.Util;
+
+namespace ShadowrunInitiative
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +30,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.label1 = new System.Windows.Forms.Label();
             this.charactersListBox = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -448,7 +450,7 @@
             // 
             this.combatSituationPanel1.Location = new System.Drawing.Point(12, 97);
             this.combatSituationPanel1.Name = "combatSituationPanel1";
-            this.combatSituationPanel1.Situation = ShadowrunInitiative.CombatSituation.PHYSICAL;
+            this.combatSituationPanel1.Situation = CombatSituation.PHYSICAL;
             this.combatSituationPanel1.Size = new System.Drawing.Size(150, 66);
             this.combatSituationPanel1.TabIndex = 18;
             // 
@@ -456,7 +458,7 @@
             // 
             this.matrixLevelPanel.Location = new System.Drawing.Point(0, 139);
             this.matrixLevelPanel.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.matrixLevelPanel.MatrixLevel = ShadowrunInitiative.MatrixLevel.AR;
+            this.matrixLevelPanel.MatrixLevel = MatrixLevel.AR;
             this.matrixLevelPanel.Name = "matrixLevelPanel";
             this.matrixLevelPanel.Size = new System.Drawing.Size(137, 66);
             this.matrixLevelPanel.TabIndex = 20;

@@ -3,17 +3,24 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using ShadowrunInitiative.Core;
+using ShadowrunInitiative.Util;
 
 namespace ShadowrunInitiative
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         private CharacterSpeedComparer CharacterSorter = new CharacterSpeedComparer();
 
         private BindingList<Character> m_Characters = new BindingList<Character>();
         private Character m_CurrentCharacter = null;
-
         public TimeSpan CombatLength = TimeSpan.FromSeconds(0);
+        private int m_CombatTurns = 0;
+        private const int MAX_LOG = 64;
+        private bool m_NewTurn = false;
+        private bool m_NeedsInitiative = false;
+        private BindingList<string> m_LogMessages = new BindingList<string>();
+
         public int CombatTurns
         {
             get { return m_CombatTurns; }
@@ -32,16 +39,11 @@ namespace ShadowrunInitiative
                 combatTimeLabel.Text = string.Join(", ", comps);
             }
         }
-        private int m_CombatTurns = 0;
 
         private Character SelectedCharacter
         {
             get { return charactersListBox.SelectedItem as Character; }
         }
-
-        private const int MAX_LOG = 64;
-
-        private BindingList<string> m_LogMessages = new BindingList<string>();
 
         private void LogMessage(string str)
         {
@@ -50,7 +52,7 @@ namespace ShadowrunInitiative
             m_LogMessages.Add(str);
         }
 
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
 
@@ -82,8 +84,8 @@ namespace ShadowrunInitiative
             nextTurnButton.Enabled = m_Characters.Any();
             newCombatButton.Enabled = m_Characters.Any();
 
-            interrupt5Button.Enabled = SelectedCharacter != null && SelectedCharacter.Initiative >= 5;
-            interrupt10Button.Enabled = SelectedCharacter != null && SelectedCharacter.Initiative >= 10;
+            interrupt5Button.Enabled = SelectedCharacter != null && SelectedCharacter.Initiative >= 0;
+            interrupt10Button.Enabled = SelectedCharacter != null && SelectedCharacter.Initiative >= 0;
 
             delayButton.Enabled = m_CurrentCharacter == SelectedCharacter;
         }
@@ -94,12 +96,12 @@ namespace ShadowrunInitiative
             if (SelectedCharacter != null)
             {
                 characterBox.Visible = true;
-                characterBox.Text = SelectedCharacter.Name;
+                characterBox.Text = SelectedCharacter.name;
                 pcCheckbox.Checked = SelectedCharacter.PC;
                 incapacitatedCheckBox.Checked = SelectedCharacter.Incapacitated;
-                edgeNumeric.Value = SelectedCharacter.Edge;
-                reactNumeric.Value = SelectedCharacter.Reaction;
-                intuitNumeric.Value = SelectedCharacter.Intuition;
+                edgeNumeric.Value = SelectedCharacter.edge;
+                reactNumeric.Value = SelectedCharacter.reaction;
+                intuitNumeric.Value = SelectedCharacter.intuition;
                 initNumeric.Value = SelectedCharacter.Initiative;
             }
             else
@@ -134,19 +136,19 @@ namespace ShadowrunInitiative
         private void edgeNumeric_ValueChanged(object sender, EventArgs e)
         {
             if (SelectedCharacter != null)
-                SelectedCharacter.Edge = (int)edgeNumeric.Value;
+                SelectedCharacter.edge = (int)edgeNumeric.Value;
         }
 
         private void reactNumeric_ValueChanged(object sender, EventArgs e)
         {
             if (SelectedCharacter != null)
-                SelectedCharacter.Reaction = (int)reactNumeric.Value;
+                SelectedCharacter.reaction = (int)reactNumeric.Value;
         }
 
         private void intuitNumeric_ValueChanged(object sender, EventArgs e)
         {
             if (SelectedCharacter != null)
-                SelectedCharacter.Intuition = (int)intuitNumeric.Value;
+                SelectedCharacter.intuition = (int)intuitNumeric.Value;
         }
 
         private void initNumeric_ValueChanged(object sender, EventArgs e)
@@ -160,7 +162,7 @@ namespace ShadowrunInitiative
             if (m_Characters.Contains(SelectedCharacter))
             {
                 if (MessageBox.Show(
-                    "Really delete character '" + SelectedCharacter.Name + "'?",
+                    "Really delete character '" + SelectedCharacter.name + "'?",
                     "Delete Character",
                     MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
                 {
@@ -185,10 +187,14 @@ namespace ShadowrunInitiative
             {
                 if (SelectedCharacter.Initiative + value >= 0)
                 {
-                    SelectedCharacter.Initiative += value;
-                    LogMessage(value + ": " + SelectedCharacter.Name + " spends interrupt.");
+                    SelectedCharacter.Initiative += value;                    
+                }else
+                {
+                    SelectedCharacter.Initiative = 0;
                 }
+                LogMessage(SelectedCharacter.name + " gibt "+value+" initiative aus.");
             }
+            AdvanceTurn();
         }
 
         private void interruptXButton_Click(object sender, EventArgs e)
@@ -219,6 +225,7 @@ namespace ShadowrunInitiative
 
         private void nextTurnButton_Click(object sender, EventArgs e)
         {
+            CombatTurns = 0;
             AdvanceTurn();
         }
 
@@ -229,14 +236,15 @@ namespace ShadowrunInitiative
             if (character != null)
             {
                 nextTurnButton.Text = "Next Turn";
-                character.WentThisTurn = true;
+                //character.WentThisTurn = true;
                 //currentTurnStaticLabel.Visible = true;
-                currentCharLabel.Text = ">>" + character.Name + "<<";
+                currentCharLabel.Text = ">>" + character.name + "<<";
 
-                string turnMessage = "TURN: " + character.Name;
-                if (character.Seize)
+                string turnMessage = "TURN: " + character.name;
+                if (character.seize)
                     turnMessage += " (seized)";
                 LogMessage(turnMessage);
+                charactersListBox.SelectedItem = character;
             }
             else
             {
@@ -245,9 +253,6 @@ namespace ShadowrunInitiative
                 currentCharLabel.Text = "N/A";
             }
         }
-
-        private bool m_NewTurn = false;
-        private bool m_NeedsInitiative = false;
 
         private void AdvanceTurn()
         {
@@ -262,30 +267,23 @@ namespace ShadowrunInitiative
                     return;
             }
 
-            IEnumerable<Character> stillCanAct = m_Characters.Where(c => c.Initiative > 0 && !c.Incapacitated);
-            IEnumerable<Character> stillToGo = stillCanAct.Where(c => !c.WentThisTurn);
+            IEnumerable<Character> delayed = m_Characters.Where(c => c.delay);
+            IEnumerable<Character> stillCanAct = m_Characters.Where(c => c.Initiative > 0 && !c.Incapacitated && !c.delay);
+            IEnumerable<Character> stillToGo = stillCanAct.Where(c => !c.wentThisTurn);
             if (stillToGo.Any())
             {
                 //Someone's turn right now
                 if (m_NewTurn)
                 {
                     LogMessage("");
-                    LogMessage("---- NEW TURN ----");
+                    LogMessage("---- NEUE RUNDE ----");
                     m_NewTurn = false;
                 }
                 SetCurrentCharacter(stillToGo.OrderByDescending(c => c, CharacterSorter).First());
-            }
-            else if (stillCanAct.Any())
-            {
-                //Next combat turn
-                foreach (Character c in m_Characters)
+                foreach(Character c in delayed)
                 {
-                    c.Initiative -= 10;
-                    c.TurnReset();
+                    c.Initiative = m_CurrentCharacter.Initiative;
                 }
-                CombatTurns++;
-                m_NewTurn = true;
-                AdvanceTurn();
             }
             else
             {
@@ -293,9 +291,10 @@ namespace ShadowrunInitiative
                 foreach (Character c in m_Characters)
                     c.TurnReset();
                 SetCurrentCharacter(null);
-
+                CombatTurns++;
+                m_LogMessages.Clear();
                 LogMessage("");
-                LogMessage("-+-+ NEW ROUND +-+-");
+                LogMessage("-+-+ NEUE RUNDE +-+-");
 
                 //Query for initiatives
                 QueryInitiatives query = new QueryInitiatives(m_Characters);
@@ -304,22 +303,18 @@ namespace ShadowrunInitiative
                 else
                     m_NeedsInitiative = true;
             }
-
             m_NewTurn = false;
         }
 
         private void delayButton_Click(object sender, EventArgs e)
         {
-            DelayAction delayDialog = new DelayAction();
-            if (delayDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (SelectedCharacter != null)
             {
-
+                SelectedCharacter.delay = true;
+                LogMessage(SelectedCharacter.name + " wartet.");
             }
+            AdvanceTurn();
         }
 
-        public void UpdateCombatSituation()
-        {
-
-        }
     }
 }

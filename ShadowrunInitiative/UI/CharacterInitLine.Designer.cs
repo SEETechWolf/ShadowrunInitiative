@@ -31,6 +31,7 @@
             this.characterNameLabel = new System.Windows.Forms.Label();
             this.initiativeNumeric = new System.Windows.Forms.NumericUpDown();
             this.seizeCheckBox = new System.Windows.Forms.CheckBox();
+            this.Wuerfelbutton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.initiativeNumeric)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,15 +60,26 @@
             this.seizeCheckBox.TabIndex = 2;
             this.seizeCheckBox.UseVisualStyleBackColor = true;
             // 
+            // Wuerfelbutton
+            // 
+            this.Wuerfelbutton.Location = new System.Drawing.Point(218, 4);
+            this.Wuerfelbutton.Name = "Wuerfelbutton";
+            this.Wuerfelbutton.Size = new System.Drawing.Size(75, 23);
+            this.Wuerfelbutton.TabIndex = 3;
+            this.Wuerfelbutton.Text = "Würfeln";
+            this.Wuerfelbutton.UseVisualStyleBackColor = true;
+            this.Wuerfelbutton.Click += new System.EventHandler(this.Wuerfelbutton_Click);
+            // 
             // CharacterInitLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.Wuerfelbutton);
             this.Controls.Add(this.seizeCheckBox);
             this.Controls.Add(this.initiativeNumeric);
             this.Controls.Add(this.characterNameLabel);
             this.Name = "CharacterInitLine";
-            this.Size = new System.Drawing.Size(224, 34);
+            this.Size = new System.Drawing.Size(300, 34);
             ((System.ComponentModel.ISupportInitialize)(this.initiativeNumeric)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -79,5 +91,6 @@
         private System.Windows.Forms.Label characterNameLabel;
         private System.Windows.Forms.NumericUpDown initiativeNumeric;
         private System.Windows.Forms.CheckBox seizeCheckBox;
+        private System.Windows.Forms.Button Wuerfelbutton;
     }
 }

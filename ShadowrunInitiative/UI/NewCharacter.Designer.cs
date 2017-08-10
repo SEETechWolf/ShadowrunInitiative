@@ -39,9 +39,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.reactNumeric = new System.Windows.Forms.NumericUpDown();
+            this.iniW = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.edgeNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.intuitNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.reactNumeric)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iniW)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -65,18 +68,19 @@
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton.Location = new System.Drawing.Point(13, 151);
+            this.okButton.Location = new System.Drawing.Point(15, 175);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 6;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
+            this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
             // cancelButton
             // 
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(95, 151);
+            this.cancelButton.Location = new System.Drawing.Point(97, 175);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 7;
@@ -152,13 +156,39 @@
             this.reactNumeric.TabIndex = 4;
             this.reactNumeric.ValueChanged += new System.EventHandler(this.reactNumeric_ValueChanged);
             // 
+            // iniW
+            // 
+            this.iniW.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iniW.Location = new System.Drawing.Point(66, 140);
+            this.iniW.Name = "iniW";
+            this.iniW.Size = new System.Drawing.Size(51, 20);
+            this.iniW.TabIndex = 19;
+            this.iniW.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.iniW.ValueChanged += new System.EventHandler(this.intW_ValueChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(12, 142);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(52, 13);
+            this.label5.TabIndex = 20;
+            this.label5.Text = "Ini Würfel";
+            // 
             // NewCharacter
             // 
             this.AcceptButton = this.okButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(184, 186);
+            this.ClientSize = new System.Drawing.Size(184, 210);
+            this.Controls.Add(this.iniW);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.pcCheckbox);
             this.Controls.Add(this.edgeNumeric);
             this.Controls.Add(this.intuitNumeric);
@@ -181,6 +211,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.edgeNumeric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.intuitNumeric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.reactNumeric)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iniW)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -199,5 +230,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown reactNumeric;
+        private System.Windows.Forms.NumericUpDown iniW;
+        private System.Windows.Forms.Label label5;
     }
 }

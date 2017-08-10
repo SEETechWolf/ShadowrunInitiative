@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using ShadowrunInitiative.Core;
 
 namespace ShadowrunInitiative
 {
@@ -17,7 +18,7 @@ namespace ShadowrunInitiative
             InitializeComponent();
 
             m_ForCharacter = forChar;
-            whoInterruptLabel.Text = "Interrupt: " + forChar.Name;
+            whoInterruptLabel.Text = "Interrupt: " + forChar.name;
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
