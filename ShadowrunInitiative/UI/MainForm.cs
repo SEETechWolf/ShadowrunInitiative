@@ -5,6 +5,9 @@ using System.Linq;
 using System.Windows.Forms;
 using ShadowrunInitiative.Core;
 using ShadowrunInitiative.Util;
+using System.Xml;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace ShadowrunInitiative
 {
@@ -50,6 +53,8 @@ namespace ShadowrunInitiative
             if (m_LogMessages.Count >= MAX_LOG)
                 m_LogMessages.RemoveAt(0);
             m_LogMessages.Add(str);
+            int visibleItems = logListBox.ClientSize.Height / logListBox.ItemHeight;
+            logListBox.TopIndex = Math.Max(logListBox.Items.Count - visibleItems + 1, 0);
         }
 
         public MainForm()
@@ -88,6 +93,7 @@ namespace ShadowrunInitiative
             interrupt10Button.Enabled = SelectedCharacter != null && SelectedCharacter.Initiative >= 0;
 
             delayButton.Enabled = m_CurrentCharacter == SelectedCharacter;
+            characterBox.Update();
         }
 
         private void charactersListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -103,6 +109,7 @@ namespace ShadowrunInitiative
                 reactNumeric.Value = SelectedCharacter.reaction;
                 intuitNumeric.Value = SelectedCharacter.intuition;
                 initNumeric.Value = SelectedCharacter.Initiative;
+                numericUpDownD6.Value = SelectedCharacter.iniWuerfel;
             }
             else
             {
@@ -157,6 +164,12 @@ namespace ShadowrunInitiative
                 SelectedCharacter.Initiative = (int)initNumeric.Value;
         }
 
+        private void d6Numeric_ValueChanged(object sender, EventArgs e)
+        {
+            if (SelectedCharacter != null)
+                SelectedCharacter.iniWuerfel = (int)numericUpDownD6.Value;
+        }
+
         private void removeCharacterButton_Click(object sender, EventArgs e)
         {
             if (m_Characters.Contains(SelectedCharacter))
@@ -196,7 +209,7 @@ namespace ShadowrunInitiative
             }
             AdvanceTurn();
         }
-
+        
         private void interruptXButton_Click(object sender, EventArgs e)
         {
             ChooseInterrupt choose = new ChooseInterrupt(SelectedCharacter);
@@ -216,16 +229,21 @@ namespace ShadowrunInitiative
                 for (int c = m_Characters.Count - 1; c >= 0; c--)
                 {
                     if (!m_Characters[c].PC)
-                        m_Characters.RemoveAt(c);
-                    m_LogMessages.Clear();
-                    CombatTurns = 0;
+                        m_Characters.RemoveAt(c);                    
                 }
+                m_LogMessages.Clear();
+                CombatTurns = 0;
             }
         }
 
         private void nextTurnButton_Click(object sender, EventArgs e)
         {
+            foreach(Character c in m_Characters)
+            {
+                c.Initiative = 0;
+            }
             CombatTurns = 0;
+            m_LogMessages.Clear();
             AdvanceTurn();
         }
 
@@ -316,5 +334,57 @@ namespace ShadowrunInitiative
             AdvanceTurn();
         }
 
+        private void buttonLaden_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                XmlDocument xmlDocument = new XmlDocument();
+                xmlDocument.Load("save.xml");
+                string xmlString = xmlDocument.OuterXml;
+
+                using (StringReader read = new StringReader(xmlString))
+                {
+                    Type outType = typeof(BindingList<Character>);
+
+                    XmlSerializer serializer = new XmlSerializer(outType);
+                    using (XmlReader reader = new XmlTextReader(read))
+                    {
+                        m_Characters = (BindingList<Character>)serializer.Deserialize(reader);
+                        reader.Close();
+                    }
+
+                    read.Close();
+                }
+                charactersListBox.DataSource = m_Characters;
+                UpdateCharacterDependent();
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+            }
+        }
+
+        private void buttonSpeichern_Click(object sender, EventArgs e)
+        {
+            if (m_Characters == null) { return; }
+
+            try
+            {
+                XmlDocument xmlDocument = new XmlDocument();
+                XmlSerializer serializer = new XmlSerializer(m_Characters.GetType());
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    serializer.Serialize(stream, m_Characters);
+                    stream.Position = 0;
+                    xmlDocument.Load(stream);
+                    xmlDocument.Save("save.xml");
+                    stream.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+            }
+        }
     }
 }

@@ -40,16 +40,19 @@ namespace ShadowrunInitiative
             this.intuitNumeric = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.characterBox = new System.Windows.Forms.GroupBox();
-            this.delayButton = new System.Windows.Forms.Button();
-            this.incapacitatedCheckBox = new System.Windows.Forms.CheckBox();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.pcCheckbox = new System.Windows.Forms.CheckBox();
+            this.incapacitatedCheckBox = new System.Windows.Forms.CheckBox();
+            this.initNumeric = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.removeCharacterButton = new System.Windows.Forms.Button();
+            this.delayButton = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.interruptXButton = new System.Windows.Forms.Button();
             this.interrupt10Button = new System.Windows.Forms.Button();
             this.interrupt5Button = new System.Windows.Forms.Button();
-            this.removeCharacterButton = new System.Windows.Forms.Button();
-            this.initNumeric = new System.Windows.Forms.NumericUpDown();
-            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.newCombatButton = new System.Windows.Forms.Button();
             this.addCharacterButton = new System.Windows.Forms.Button();
@@ -58,30 +61,32 @@ namespace ShadowrunInitiative
             this.currentCharLabel = new System.Windows.Forms.Label();
             this.nextTurnButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.combatTimeLabel = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.combatSituationPanel1 = new ShadowrunInitiative.CombatSituationPanel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.numericUpDownD6 = new System.Windows.Forms.NumericUpDown();
+            this.buttonLaden = new System.Windows.Forms.Button();
+            this.buttonSpeichern = new System.Windows.Forms.Button();
             this.matrixLevelPanel = new ShadowrunInitiative.MatrixLevelPanel();
+            this.combatSituationPanel1 = new ShadowrunInitiative.CombatSituationPanel();
             ((System.ComponentModel.ISupportInitialize)(this.edgeNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.reactNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.intuitNumeric)).BeginInit();
             this.characterBox.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.initNumeric)).BeginInit();
+            this.panel3.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownD6)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 174);
+            this.label1.Location = new System.Drawing.Point(9, 252);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(61, 13);
             this.label1.TabIndex = 0;
@@ -92,9 +97,9 @@ namespace ShadowrunInitiative
             this.charactersListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.charactersListBox.FormattingEnabled = true;
-            this.charactersListBox.Location = new System.Drawing.Point(12, 190);
+            this.charactersListBox.Location = new System.Drawing.Point(12, 268);
             this.charactersListBox.Name = "charactersListBox";
-            this.charactersListBox.Size = new System.Drawing.Size(150, 225);
+            this.charactersListBox.Size = new System.Drawing.Size(150, 147);
             this.charactersListBox.TabIndex = 1;
             this.charactersListBox.SelectedIndexChanged += new System.EventHandler(this.charactersListBox_SelectedIndexChanged);
             // 
@@ -168,29 +173,39 @@ namespace ShadowrunInitiative
             this.characterBox.TabStop = false;
             this.characterBox.Text = "Character Name";
             // 
-            // delayButton
+            // flowLayoutPanel1
             // 
-            this.delayButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.delayButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.delayButton.Location = new System.Drawing.Point(72, 0);
-            this.delayButton.Name = "delayButton";
-            this.delayButton.Size = new System.Drawing.Size(66, 23);
-            this.delayButton.TabIndex = 24;
-            this.delayButton.Text = "Delay";
-            this.delayButton.UseVisualStyleBackColor = true;
-            this.delayButton.Click += new System.EventHandler(this.delayButton_Click);
+            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowLayoutPanel1.Controls.Add(this.panel2);
+            this.flowLayoutPanel1.Controls.Add(this.panel3);
+            this.flowLayoutPanel1.Controls.Add(this.groupBox3);
+            this.flowLayoutPanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(7, 20);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(137, 296);
+            this.flowLayoutPanel1.TabIndex = 0;
             // 
-            // incapacitatedCheckBox
+            // panel2
             // 
-            this.incapacitatedCheckBox.AutoSize = true;
-            this.incapacitatedCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.incapacitatedCheckBox.Location = new System.Drawing.Point(50, 3);
-            this.incapacitatedCheckBox.Name = "incapacitatedCheckBox";
-            this.incapacitatedCheckBox.Size = new System.Drawing.Size(91, 17);
-            this.incapacitatedCheckBox.TabIndex = 14;
-            this.incapacitatedCheckBox.Text = "Incapacitated";
-            this.incapacitatedCheckBox.UseVisualStyleBackColor = true;
-            this.incapacitatedCheckBox.CheckedChanged += new System.EventHandler(this.incapacitatedCheckBox_CheckedChanged);
+            this.panel2.Controls.Add(this.label7);
+            this.panel2.Controls.Add(this.numericUpDownD6);
+            this.panel2.Controls.Add(this.pcCheckbox);
+            this.panel2.Controls.Add(this.incapacitatedCheckBox);
+            this.panel2.Controls.Add(this.reactNumeric);
+            this.panel2.Controls.Add(this.label3);
+            this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.initNumeric);
+            this.panel2.Controls.Add(this.intuitNumeric);
+            this.panel2.Controls.Add(this.label5);
+            this.panel2.Controls.Add(this.edgeNumeric);
+            this.panel2.Location = new System.Drawing.Point(0, 3);
+            this.panel2.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(138, 213);
+            this.panel2.TabIndex = 19;
             // 
             // pcCheckbox
             // 
@@ -204,13 +219,77 @@ namespace ShadowrunInitiative
             this.pcCheckbox.UseVisualStyleBackColor = true;
             this.pcCheckbox.CheckedChanged += new System.EventHandler(this.pcCheckbox_CheckedChanged);
             // 
+            // incapacitatedCheckBox
+            // 
+            this.incapacitatedCheckBox.AutoSize = true;
+            this.incapacitatedCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.incapacitatedCheckBox.Location = new System.Drawing.Point(50, 3);
+            this.incapacitatedCheckBox.Name = "incapacitatedCheckBox";
+            this.incapacitatedCheckBox.Size = new System.Drawing.Size(91, 17);
+            this.incapacitatedCheckBox.TabIndex = 14;
+            this.incapacitatedCheckBox.Text = "Incapacitated";
+            this.incapacitatedCheckBox.UseVisualStyleBackColor = true;
+            this.incapacitatedCheckBox.CheckedChanged += new System.EventHandler(this.incapacitatedCheckBox_CheckedChanged);
+            // 
+            // initNumeric
+            // 
+            this.initNumeric.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.initNumeric.Location = new System.Drawing.Point(53, 171);
+            this.initNumeric.Name = "initNumeric";
+            this.initNumeric.Size = new System.Drawing.Size(51, 20);
+            this.initNumeric.TabIndex = 22;
+            this.initNumeric.ValueChanged += new System.EventHandler(this.initNumeric_ValueChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(22, 173);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(25, 13);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "&Init";
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.removeCharacterButton);
+            this.panel3.Controls.Add(this.delayButton);
+            this.panel3.Location = new System.Drawing.Point(0, 222);
+            this.panel3.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(138, 23);
+            this.panel3.TabIndex = 19;
+            // 
+            // removeCharacterButton
+            // 
+            this.removeCharacterButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.removeCharacterButton.Location = new System.Drawing.Point(0, 0);
+            this.removeCharacterButton.Name = "removeCharacterButton";
+            this.removeCharacterButton.Size = new System.Drawing.Size(66, 23);
+            this.removeCharacterButton.TabIndex = 23;
+            this.removeCharacterButton.Text = "Delete";
+            this.removeCharacterButton.UseVisualStyleBackColor = true;
+            this.removeCharacterButton.Click += new System.EventHandler(this.removeCharacterButton_Click);
+            // 
+            // delayButton
+            // 
+            this.delayButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.delayButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.delayButton.Location = new System.Drawing.Point(72, 0);
+            this.delayButton.Name = "delayButton";
+            this.delayButton.Size = new System.Drawing.Size(66, 23);
+            this.delayButton.TabIndex = 24;
+            this.delayButton.Text = "Delay";
+            this.delayButton.UseVisualStyleBackColor = true;
+            this.delayButton.Click += new System.EventHandler(this.delayButton_Click);
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.interruptXButton);
             this.groupBox3.Controls.Add(this.interrupt10Button);
             this.groupBox3.Controls.Add(this.interrupt5Button);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(0, 240);
+            this.groupBox3.Location = new System.Drawing.Point(0, 251);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(138, 54);
@@ -248,38 +327,10 @@ namespace ShadowrunInitiative
             this.interrupt5Button.UseVisualStyleBackColor = true;
             this.interrupt5Button.Click += new System.EventHandler(this.interrupt5Button_Click);
             // 
-            // removeCharacterButton
-            // 
-            this.removeCharacterButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.removeCharacterButton.Location = new System.Drawing.Point(0, 0);
-            this.removeCharacterButton.Name = "removeCharacterButton";
-            this.removeCharacterButton.Size = new System.Drawing.Size(66, 23);
-            this.removeCharacterButton.TabIndex = 23;
-            this.removeCharacterButton.Text = "Delete";
-            this.removeCharacterButton.UseVisualStyleBackColor = true;
-            this.removeCharacterButton.Click += new System.EventHandler(this.removeCharacterButton_Click);
-            // 
-            // initNumeric
-            // 
-            this.initNumeric.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.initNumeric.Location = new System.Drawing.Point(53, 104);
-            this.initNumeric.Name = "initNumeric";
-            this.initNumeric.Size = new System.Drawing.Size(51, 20);
-            this.initNumeric.TabIndex = 22;
-            this.initNumeric.ValueChanged += new System.EventHandler(this.initNumeric_ValueChanged);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(22, 106);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(25, 13);
-            this.label5.TabIndex = 21;
-            this.label5.Text = "&Init";
-            // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.buttonSpeichern);
+            this.groupBox1.Controls.Add(this.buttonLaden);
             this.groupBox1.Controls.Add(this.newCombatButton);
             this.groupBox1.Controls.Add(this.addCharacterButton);
             this.groupBox1.Location = new System.Drawing.Point(168, 9);
@@ -293,9 +344,9 @@ namespace ShadowrunInitiative
             this.newCombatButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.newCombatButton.Location = new System.Drawing.Point(11, 48);
             this.newCombatButton.Name = "newCombatButton";
-            this.newCombatButton.Size = new System.Drawing.Size(127, 23);
+            this.newCombatButton.Size = new System.Drawing.Size(62, 23);
             this.newCombatButton.TabIndex = 1;
-            this.newCombatButton.Text = "Reset";
+            this.newCombatButton.Text = "Löschen";
             this.newCombatButton.UseVisualStyleBackColor = true;
             this.newCombatButton.Click += new System.EventHandler(this.newCombatButton_Click);
             // 
@@ -304,9 +355,9 @@ namespace ShadowrunInitiative
             this.addCharacterButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.addCharacterButton.Location = new System.Drawing.Point(11, 19);
             this.addCharacterButton.Name = "addCharacterButton";
-            this.addCharacterButton.Size = new System.Drawing.Size(127, 23);
+            this.addCharacterButton.Size = new System.Drawing.Size(62, 23);
             this.addCharacterButton.TabIndex = 0;
-            this.addCharacterButton.Text = "&Add Character";
+            this.addCharacterButton.Text = "Neu";
             this.addCharacterButton.UseVisualStyleBackColor = true;
             this.addCharacterButton.Click += new System.EventHandler(this.addCharacterButton_Click);
             // 
@@ -384,49 +435,6 @@ namespace ShadowrunInitiative
             this.panel1.Size = new System.Drawing.Size(150, 79);
             this.panel1.TabIndex = 15;
             // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.pcCheckbox);
-            this.panel2.Controls.Add(this.incapacitatedCheckBox);
-            this.panel2.Controls.Add(this.reactNumeric);
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.initNumeric);
-            this.panel2.Controls.Add(this.intuitNumeric);
-            this.panel2.Controls.Add(this.label5);
-            this.panel2.Controls.Add(this.edgeNumeric);
-            this.panel2.Location = new System.Drawing.Point(0, 3);
-            this.panel2.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(138, 130);
-            this.panel2.TabIndex = 19;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.removeCharacterButton);
-            this.panel3.Controls.Add(this.delayButton);
-            this.panel3.Location = new System.Drawing.Point(0, 211);
-            this.panel3.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(138, 23);
-            this.panel3.TabIndex = 19;
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanel1.Controls.Add(this.panel2);
-            this.flowLayoutPanel1.Controls.Add(this.matrixLevelPanel);
-            this.flowLayoutPanel1.Controls.Add(this.panel3);
-            this.flowLayoutPanel1.Controls.Add(this.groupBox3);
-            this.flowLayoutPanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(7, 20);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(137, 296);
-            this.flowLayoutPanel1.TabIndex = 0;
-            // 
             // combatTimeLabel
             // 
             this.combatTimeLabel.AutoSize = true;
@@ -446,29 +454,69 @@ namespace ShadowrunInitiative
             this.label6.TabIndex = 19;
             this.label6.Text = "Combat Duration:";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(23, 106);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(21, 13);
+            this.label7.TabIndex = 23;
+            this.label7.Text = "D6";
+            // 
+            // numericUpDownD6
+            // 
+            this.numericUpDownD6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDownD6.Location = new System.Drawing.Point(53, 104);
+            this.numericUpDownD6.Name = "numericUpDownD6";
+            this.numericUpDownD6.Size = new System.Drawing.Size(51, 20);
+            this.numericUpDownD6.TabIndex = 24;
+            this.numericUpDownD6.ValueChanged += new System.EventHandler(this.d6Numeric_ValueChanged);
+            // 
+            // buttonLaden
+            // 
+            this.buttonLaden.Location = new System.Drawing.Point(79, 18);
+            this.buttonLaden.Name = "buttonLaden";
+            this.buttonLaden.Size = new System.Drawing.Size(65, 23);
+            this.buttonLaden.TabIndex = 2;
+            this.buttonLaden.Text = "Laden";
+            this.buttonLaden.UseVisualStyleBackColor = true;
+            this.buttonLaden.Click += new System.EventHandler(this.buttonLaden_Click);
+            // 
+            // buttonSpeichern
+            // 
+            this.buttonSpeichern.Location = new System.Drawing.Point(78, 48);
+            this.buttonSpeichern.Name = "buttonSpeichern";
+            this.buttonSpeichern.Size = new System.Drawing.Size(65, 23);
+            this.buttonSpeichern.TabIndex = 3;
+            this.buttonSpeichern.Text = "Speichern";
+            this.buttonSpeichern.UseVisualStyleBackColor = true;
+            this.buttonSpeichern.Click += new System.EventHandler(this.buttonSpeichern_Click);
+            // 
+            // matrixLevelPanel
+            // 
+            this.matrixLevelPanel.Location = new System.Drawing.Point(12, 169);
+            this.matrixLevelPanel.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.matrixLevelPanel.MatrixLevel = ShadowrunInitiative.Util.MatrixLevel.AR;
+            this.matrixLevelPanel.Name = "matrixLevelPanel";
+            this.matrixLevelPanel.Size = new System.Drawing.Size(147, 66);
+            this.matrixLevelPanel.TabIndex = 20;
+            // 
             // combatSituationPanel1
             // 
             this.combatSituationPanel1.Location = new System.Drawing.Point(12, 97);
             this.combatSituationPanel1.Name = "combatSituationPanel1";
-            this.combatSituationPanel1.Situation = CombatSituation.PHYSICAL;
+            this.combatSituationPanel1.Situation = ShadowrunInitiative.Util.CombatSituation.PHYSICAL;
             this.combatSituationPanel1.Size = new System.Drawing.Size(150, 66);
             this.combatSituationPanel1.TabIndex = 18;
             // 
-            // matrixLevelPanel
-            // 
-            this.matrixLevelPanel.Location = new System.Drawing.Point(0, 139);
-            this.matrixLevelPanel.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.matrixLevelPanel.MatrixLevel = MatrixLevel.AR;
-            this.matrixLevelPanel.Name = "matrixLevelPanel";
-            this.matrixLevelPanel.Size = new System.Drawing.Size(137, 66);
-            this.matrixLevelPanel.TabIndex = 20;
-            // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(610, 426);
             this.Controls.Add(this.combatTimeLabel);
+            this.Controls.Add(this.matrixLevelPanel);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.combatSituationPanel1);
             this.Controls.Add(this.logListBox);
@@ -480,21 +528,22 @@ namespace ShadowrunInitiative
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Shadowrun Initiative";
             ((System.ComponentModel.ISupportInitialize)(this.edgeNumeric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.reactNumeric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.intuitNumeric)).EndInit();
             this.characterBox.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.initNumeric)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.initNumeric)).EndInit();
             this.panel3.ResumeLayout(false);
-            this.flowLayoutPanel1.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownD6)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -536,6 +585,10 @@ namespace ShadowrunInitiative
         private System.Windows.Forms.Label combatTimeLabel;
         private System.Windows.Forms.Label label6;
         private MatrixLevelPanel matrixLevelPanel;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.NumericUpDown numericUpDownD6;
+        private System.Windows.Forms.Button buttonSpeichern;
+        private System.Windows.Forms.Button buttonLaden;
     }
 }
 
